@@ -1,0 +1,32 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hola {{ user.username }}!
+  <br><br>
+  <button onclick="abrirPuerta();">Abrir Puerta</button>
+  <!--<p><a href="{% url 'logout' %}">logout</a></p>-->
+  <input type="button" onclick="location.href='{% url 'logout' %}';" value="Logout" />
+
+  <script type="text/javascript">
+  	function abrirPuerta(){
+  		httpGet("ferduino/abrir");
+  	}
+
+  	function httpGet(theUrl)
+	{
+	    var xmlHttp = new XMLHttpRequest();
+	    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+	    xmlHttp.send( null );
+	    return xmlHttp.responseText;
+	}
+  </script>
+{% else %}
+  <p>No estas logueado</p>
+  <!--<a href="{% url 'login' %}">login</a>-->
+  <input type="button" onclick="location.href='{% url 'login' %}';" value="Login" />
+{% endif %}
+{% endblock %}
