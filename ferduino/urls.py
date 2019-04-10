@@ -20,7 +20,7 @@ from camera.views import abrir
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^ferduino/abrir', abrir),
+    url(r'^abrir', abrir),
     url(r'^', include('django.contrib.auth.urls')),
     url('', TemplateView.as_view(template_name='home.html'), name='home')
 ]
